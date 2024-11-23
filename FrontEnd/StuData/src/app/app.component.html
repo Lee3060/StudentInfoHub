@@ -1,0 +1,55 @@
+<p>Student Data in Table Format:</p>
+
+<!-- Button to fetch data -->
+<button (click)="fetchStudentData()">Load Student Data</button>  <!--Event Called-->
+<br />
+<br />
+
+
+<!-- Form to add a new student -->
+<form  (ngSubmit)="addStudent()">
+  <h3>Add New Student</h3>
+  <label>Id: </label>
+  <input type="number"  [(ngModel)]="newStudent.id" [ngModelOptions]="{standalone: true}" /><br />
+  <label>Name: </label>
+  <input type="text"  [(ngModel)]="newStudent.studentName" [ngModelOptions]="{standalone: true}" /><br />
+  <label>Gender: </label>
+  <input type="text"  [(ngModel)]="newStudent.gender" [ngModelOptions]="{standalone: true}" /><br />
+  <label>Age: </label>
+  <input type="number"  [(ngModel)]="newStudent.age" [ngModelOptions]="{standalone: true}" /><br />
+  <label>Subjects: </label>
+  <input type="text"  [(ngModel)]="newStudent.subjects[0].subjectName" [ngModelOptions]="{standalone: true}" /><br />
+  <button type="submit">Add Student</button>
+</form>
+<br />
+
+<!-- Display student data in table format -->
+<h3>Students Data</h3>
+<table border="1">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Student Name</th>
+      <th>Gender</th>
+      <th>Age</th>
+      <th>Subject Names</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Loop through the posts and display each student's data -->
+    <tr *ngFor="let student of posts">
+      <td>{{ student.id }}</td>
+      <td>{{ student.studentName }}</td>
+      <td>{{ student.gender }}</td>
+      <td>{{ student.age }}</td>
+      <!-- Loop through all subjects and display them -->
+      <td>
+        <span *ngFor="let subject of student.subjects; let isLast = last">
+          {{ subject.subjectName }}<span *ngIf="!isLast">, </span>
+        </span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<router-outlet></router-outlet>
